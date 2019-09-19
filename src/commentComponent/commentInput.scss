@@ -1,0 +1,31 @@
+.commentInput {
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 10px;
+}
+.inputUserName, .commentContent {
+  display: flex;
+  margin-bottom: 15px;
+  span {
+    flex: 2;
+    font-size: 14px;
+  }
+  input, textarea {
+    flex: 8;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+  }
+}
+.commit {
+  overflow: hidden;
+  button {
+    float: right;
+    padding: 2px 15px;
+    text-align: center;
+    background: #37A2D1;
+    border: 1px solid #37A2D1;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+  }
+}
