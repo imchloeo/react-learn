@@ -7,12 +7,12 @@ export default class Comment extends React.Component {
         this.state = {createTime: ''}
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         console.log(this.props);
         this.upDateTime();
     }
 
-    upDateTime() {
+    upDateTime = () => {
         const comment = this.props.comment;
         const duration = Math.floor((+new Date() - comment.createTime) / 1000);
         const _time = function () {

@@ -14,10 +14,11 @@ export default class App extends React.Component {
             date: new Date(),
             showTime: true
         }
+        this.timer = ''
     }
 
     // 回调函数，用来接收子组件（InputComponent）回传的数据
-    handleSubmitComment(comment) {
+    handleSubmitComment = comment => {
         console.log('新的评论：', comment);
         if (!comment) return;
         if (!comment.username) return alert('请输入用户名');
@@ -27,7 +28,7 @@ export default class App extends React.Component {
          *  持久化评论数据 localStorage
          * */
         let _comments = JSON.stringify(this.state.comments);
-        if(window.localStorage.getItem('reactComments')) {
+        if (window.localStorage.getItem('reactComments')) {
             window.localStorage.removeItem('reactComments');
         }
         window.localStorage.setItem('reactComments', _comments);
@@ -38,25 +39,27 @@ export default class App extends React.Component {
         })
     }
 
-    UNSAFE_componentWillMount() {
+    componentDidMount() {
         this.timer = setInterval(() => {
             this.setState({
                 date: new Date()
             })
         }, 1000);
-    }
-
-    componentDidMount() {
         // 组件挂载之后读取 localStorage 获取之前的评论
         let _comments = JSON.parse(window.localStorage.getItem('reactComments'));
-        if(_comments) {
+        if (_comments) {
             this.setState({
                 comments: _comments
             })
         }
     }
 
-    showTime() {
+    componentWillUnmount() {
+        // 卸载前清除定时器
+        this.timer = null
+    }
+
+    showTime = () => {
         this.setState({
             showTime: !this.state.showTime
         })
@@ -70,7 +73,7 @@ export default class App extends React.Component {
                 </p>
                 {this.state.showTime ? <p>现在时间是：{this.state.date.toLocaleTimeString()}</p> : null}
                 {/* onSubmit 回调函数，传给子组件，用来接收子组件传来的数据*/}
-                <CommentInput onSubmit={this.handleSubmitComment.bind(this)}/>
+                <CommentInput onSubmit={this.handleSubmitComment}/>
                 <CommentList comments={this.state.comments}/>
                 {/*组件内直接写 jsx，子组件通过 props.children 接收内容*/}
                 <PropsChildren>
