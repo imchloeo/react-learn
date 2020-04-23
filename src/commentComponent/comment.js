@@ -26,7 +26,7 @@ export default class Comment extends React.Component {
             //     return `${Math.round(Math.floor(duration / 60 / 24))} 天前`
             // }
 
-            let _createYear = (new Date(duration)).getFullYear();
+            // let _createYear = (new Date(duration)).getFullYear();
 
             if (duration < 1) {
                 return '刚刚'
