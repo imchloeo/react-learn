@@ -16,15 +16,15 @@ export default class Comment extends React.Component {
         const comment = this.props.comment;
         const duration = Math.floor((+new Date() - comment.createTime) / 1000);
         const _time = function () {
-            // if (duration < 60) {
-            //     return `${Math.round(Math.max(duration, 1))} 秒前`;
-            // }
-            // if (duration >= 60 && (Math.round(duration / 60) < 24)) {
-            //     return `${Math.round(duration / 60)} 分钟前`
-            // }
-            // if (Math.round(duration / 60) >= 24) {
-            //     return `${Math.round(Math.floor(duration / 60 / 24))} 天前`
-            // }
+            if (duration < 60) {
+                return `${Math.round(Math.max(duration, 1))} 秒前`;
+            }
+            if (duration >= 60 && (Math.round(duration / 60) < 24)) {
+                return `${Math.round(duration / 60)} 分钟前`
+            }
+            if (Math.round(duration / 60) >= 24) {
+                return `${Math.round(Math.floor(duration / 60 / 24))} 天前`
+            }
 
             // let _createYear = (new Date(duration)).getFullYear();
 
