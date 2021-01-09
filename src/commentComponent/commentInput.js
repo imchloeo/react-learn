@@ -23,21 +23,24 @@ export default class CommentInput extends React.Component {
         });
     }
 
+    /***
+    提交评论
+     */
     handleCommit = () => {
         // 通过父组件的回调函数 onSubmit 将数据传到父组件，再通过父组件传给当前组件的同级组件
         if (this.props.onSubmit) {
             this.setState({
                 createTime: (+new Date())
+            }, () => {
+                const {username, content, createTime} = this.state;
+                console.log(username, '\n', content, '\n', createTime);
+                this.props.onSubmit({username, content, createTime});
+                // 提交时保存用户名到本地
+                window.localStorage.setItem('username', this.state.username);
+                // 回传完数据清空输入框
+                this.setState({content: ''});
             });
-            const {username, content, createTime} = this.state;
-            console.log(username, '\n', content, '\n', createTime);
-            this.props.onSubmit({username, content, createTime});
         }
-        // 提交时保存用户名到本地
-        window.localStorage.setItem('username', this.state.username);
-
-        // 回传完数据清空输入框
-        this.setState({content: ''});
     }
 
     // 任何不涉及 DOM 操作的组件启动操作都可以放在 componentWillMount 里面

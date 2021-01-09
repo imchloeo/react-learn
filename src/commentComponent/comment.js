@@ -14,17 +14,19 @@ export default class Comment extends React.Component {
 
     upDateTime = () => {
         const comment = this.props.comment;
+        console.log(comment);
         const duration = Math.floor((+new Date() - comment.createTime) / 1000);
+        console.log(duration);
         const _time = function () {
-            if (duration < 60) {
-                return `${Math.round(Math.max(duration, 1))} 秒前`;
-            }
-            if (duration >= 60 && (Math.round(duration / 60) < 24)) {
-                return `${Math.round(duration / 60)} 分钟前`
-            }
-            if (Math.round(duration / 60) >= 24) {
-                return `${Math.round(Math.floor(duration / 60 / 24))} 天前`
-            }
+            // if (duration < 60) {
+            //     return `${Math.round(Math.max(duration, 1))} 秒前`;
+            // }
+            // if (duration >= 60 && (Math.round(duration / 60) < 24)) {
+            //     return `${Math.round(duration / 60)} 分钟前`
+            // }
+            // if (Math.round(duration / 60) >= 24) {
+            //     return `${Math.round(Math.floor(duration / 60 / 24))} 天前`
+            // }
 
             // let _createYear = (new Date(duration)).getFullYear();
 
@@ -33,14 +35,14 @@ export default class Comment extends React.Component {
             }
             // minute
             if (Math.floor(duration / 60) < 60) {
-                return `${Math.floor(duration / 60)} 分钟`
+                return `${Math.floor(duration / 60)} 分钟前`
                 // hour or day
             } else if (Math.floor(duration / 60) >= 60) {
 
                 if (Math.floor(duration / 60 / 60) < 24) {
-                    return `${Math.floor(duration / 60 / 60)} 小时`
+                    return `${Math.floor(duration / 60 / 60)} 小时前`
                 } else {
-                    return `${Math.floor(duration / 60 / 60)} 天`
+                    return `${Math.floor(duration / 60 / 60 / 24)} 天前`
                 }
             }
         };
